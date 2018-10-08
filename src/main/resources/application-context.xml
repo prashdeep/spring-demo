@@ -22,6 +22,6 @@
 	</bean>
 	 -->
 	       <bean id="customer" 
-            class="com.eurofins.spring.bean.Customer" scope="prototype" />
+            class="com.eurofins.spring.bean.Customer" scope="prototype"  lazy-init="true"/>
 
 </beans>
