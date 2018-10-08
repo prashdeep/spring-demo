@@ -7,21 +7,12 @@
 	    http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
-		<!-- <bean id="awesomeGreet" class="com.eurofins.spring.AwesomeGreet">
-		<property name="salutation" value="Mr"></property>
+	<import resource="greeters.xml" />
+	<bean id="caller" class="com.eurofins.spring.Caller">
+		<constructor-arg name="greetingService"
+			 ref="awesomeGreet" />
 	</bean>
-
-	<bean id="greeter" class="com.eurofins.spring.Greeter">
-		<property name="salutation" value="Mrs"></property>
-	</bean>
-	
-	<bean id="caller" class="com.eurofins.spring.Caller"
-		 scope="prototype">
-		<constructor-arg name="greetingService" type="com.eurofins.spring.AwesomeGreet"
-			ref="awesomeGreet" />
-	</bean>
-	 -->
-	       <bean id="customer" 
-            class="com.eurofins.spring.bean.Customer" scope="prototype"  lazy-init="true"/>
+	<bean id="customer" class="com.eurofins.spring.bean.Customer"
+		scope="prototype" lazy-init="true" />
 
 </beans>
