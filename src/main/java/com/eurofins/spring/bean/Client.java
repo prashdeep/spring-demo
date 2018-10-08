@@ -9,12 +9,8 @@ public class Client {
 		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
 		Customer custA = (Customer) context.getBean("customer");
-		
-
-		Customer custB = (Customer) context.getBean("customer");
-
-		
-		System.out.println(custA == custB);
+				
+		System.out.println(custA.getCities());
 	}
 
 }

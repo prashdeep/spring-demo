@@ -7,7 +7,7 @@
 	    http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="awesomeGreet" class="com.eurofins.spring.AwesomeGreet">
+	<bean id="awesomeGreet" class="com.eurofins.spring.AwesomeGreet" scope="prototype">
 		<property name="salutation" value="Mr"></property>
 	</bean>
 
