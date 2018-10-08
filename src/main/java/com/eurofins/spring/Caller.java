@@ -5,14 +5,15 @@ public class Caller {
 	private GreetingService greetingService;
 	private String name;
 
-	public Caller(GreetingService greetingService, String name) {
+	public Caller() {}
+	/*public Caller(GreetingService greetingService) {
 		System.out.println("Inside the constructor of Caller");
 		this.greetingService = greetingService;
-		this.name = name;
-	}
+		
+	}*/
 
 	public void invokeGreet(String message) {
-		greetingService.greet(message, name);
+		greetingService.greet(message, "Pradeep");
 	}
 	
 	public void myCustomInit() {
