@@ -8,7 +8,7 @@ public class Client {
 	public static void main(String[] args) {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("application-context.xml");
 		Caller caller = appContext.getBean(Caller.class,"caller");
-		caller.invokeGreet("Invoked from Spring..");
+		caller.invokeGreet("Learning Spring 5.0..");
 		((AbstractApplicationContext)appContext).registerShutdownHook();
 	}
 

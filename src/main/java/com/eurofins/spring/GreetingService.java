@@ -1,5 +1,7 @@
 package com.eurofins.spring;
 
 public interface GreetingService {
-	public void greet(String message);
+	
+
+	public void greet(String message, String name);
 }

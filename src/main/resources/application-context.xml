@@ -7,13 +7,17 @@
 	    http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="caller" class="com.eurofins.spring.Caller">
-		<constructor-arg name="greetingService"
-			ref="greeter"></constructor-arg>
+	<bean id="caller" class="com.eurofins.spring.Caller" init-method="myCustomInit" destroy-method="myCustomDestroy">
+		<constructor-arg name="greetingService" ref="awesomeGreet"/>
+		<constructor-arg name="name" value="Pradeep"/>
 	</bean>
+	
 	<bean id="awesomeGreet" class="com.eurofins.spring.AwesomeGreet">
+		<property name="salutation" value="Mr"></property>
 	</bean>
+
 	<bean id="greeter" class="com.eurofins.spring.Greeter">
+		<property name="salutation" value="Mrs"></property>
 	</bean>
 
 </beans>
