@@ -1,6 +1,6 @@
 package com.eurofins.model;
 
-public class Employee {
+public abstract class Employee {
 
 	private long id;
 	private String name;
