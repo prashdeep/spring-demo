@@ -9,6 +9,8 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="com.eurofins" />
+	
+	
 	<!-- <import resource="greeters.xml" /> <bean id="caller" class="com.eurofins.spring.Caller"> 
 		<constructor-arg name="greetingService" ref="awesomeGreet" /> </bean> -->
 	<!-- <bean id="customer" class="com.eurofins.spring.bean.Customer" lazy-init="true"> 

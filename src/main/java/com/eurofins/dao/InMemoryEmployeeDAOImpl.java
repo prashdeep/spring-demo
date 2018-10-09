@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eurofins.model.Employee;
 
-@Repository
+
 public class InMemoryEmployeeDAOImpl implements EmployeeDAO {
 	
 	private Map<Long, Employee> employeeMap = new HashMap<>();

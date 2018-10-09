@@ -2,8 +2,11 @@ package com.eurofins.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.eurofins.model.Employee;
 
+@Service
 public interface EmployeeService {
 	
 	public void insertEmployee(Employee employee);
