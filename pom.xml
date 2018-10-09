@@ -32,7 +32,7 @@
 			<artifactId>spring-aop</artifactId>
 		</dependency>
 
-		<dependency>
+		 <dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.6.11</version>
