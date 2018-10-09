@@ -2,11 +2,19 @@ package com.eurofins.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.eurofins.dao.EmployeeDAO;
 import com.eurofins.model.Employee;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService{
 
+	@Autowired
+	//@Qualifier("inMemoryEmployeeDAO")
 	private EmployeeDAO employeeDAO;
 	
 	public EmployeeServiceImpl(EmployeeDAO employeeDAO) {
