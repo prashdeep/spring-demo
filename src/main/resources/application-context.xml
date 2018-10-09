@@ -32,5 +32,7 @@
 		parent="employee" > <property name="salary" value="56000"/> <property name="vacationDays" 
 		value="28"/> </bean> <bean id="contractEmployee" class="com.eurofins.model.ContractEmployee" 
 		parent="employee" /> -->
+		
+		<bean class="com.eurofins.postprocessors.SimpleBeanPostProcessor"/>
 
 </beans>

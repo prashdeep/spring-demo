@@ -13,8 +13,8 @@ import com.eurofins.model.Employee;
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
-	//@Autowired
-	//@Qualifier("inMemoryEmployeeDAO")
+	@Autowired
+	@Qualifier("inMemoryEmployeeDAO")
 	private EmployeeDAO employeeDAO;
 	
 	public EmployeeServiceImpl(EmployeeDAO employeeDAO) {
