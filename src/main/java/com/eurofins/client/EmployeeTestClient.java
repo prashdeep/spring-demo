@@ -22,12 +22,12 @@ public class EmployeeTestClient {
 		Employee vinay = new ContractEmployee(26, "Vinay");
 
 		// inserting all the employees
-		// employeeService.insertEmployee(ramesh);
-		employeeService.insertEmployee(suresh);
-		employeeService.insertEmployee(harish);
-		employeeService.insertEmployee(vinay);
+		 employeeService.insertEmployee(suresh);
+		//employeeService.insertEmployee(suresh);
+		//employeeService.insertEmployee(harish);
+		//employeeService.insertEmployee(vinay);
 
-		System.out.println(employeeService.findAllEmployees().size());
+		//System.out.println(employeeService.findAllEmployees().size());
 
 		/*
 		 * System.out.println("employee with Id: 23 ::"+employeeService.findEmployeeById
@@ -35,6 +35,8 @@ public class EmployeeTestClient {
 		 * System.out.println("employee with Id: 90 ::"+employeeService.findEmployeeById
 		 * (90));
 		 */
+		 
+		 
 
 	}
 

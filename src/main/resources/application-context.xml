@@ -20,11 +20,11 @@
 
 	<bean id="logAspect" class="com.eurofins.aspects.LoggingAspect" />
 
-	<bean id="jdbc" class="com.eurofins.util.JdbcUtil">
+	<!-- <bean id="jdbc" class="com.eurofins.util.JdbcUtil">
 		<property name="username" value="${jdbc.username}"></property>
 		<property name="password" value="${jdbc.password}"></property>
 	</bean>
-
+ -->
 	<bean id="jdbcTemplate"
 		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dbcpDataSource" />
@@ -32,17 +32,35 @@
 
 	<jdbc:embedded-database id="dataSource"
 		type="H2">
-		<jdbc:script location="classpath:db/sql/create-db.sql" />
-		<jdbc:script location="classpath:db/sql/insert-data.sql" />
+
+		<jdbc:script location="classpath:create-db.sql" />
+		<!-- <jdbc:script location="classpath:db/sql/insert-data.sql" /> -->
 	</jdbc:embedded-database>
 
 	<bean id="dbcpDataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:mem:users" />
+		<property name="url" value="jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1" />
 		<property name="username" value="sa" />
 		<property name="password" value="" />
+	</bean>
+
+	<bean depends-on="dataSource"
+		class="org.springframework.beans.factory.config.MethodInvokingBean">
+		<property name="targetClass"
+			value="org.hsqldb.util.DatabaseManagerSwing" />
+		<property name="targetMethod" value="main" />
+		<property name="arguments">
+			<list>
+				<value>--url</value>
+				<value>jdbc:h2:mem:dataSource</value>
+				<value>--user</value>
+				<value>sa</value>
+				<value>--password</value>
+				<value></value>
+			</list>
+		</property>
 	</bean>
 
 	<!-- <import resource="greeters.xml" /> <bean id="caller" class="com.eurofins.spring.Caller"> 
@@ -61,6 +79,7 @@
 
 	<bean id="inMemoryEmployeeDAO"
 		class="com.eurofins.dao.JdbcEmployeeDAOImpl">
+		<property name="dataSource" ref="dbcpDataSource"></property>
 	</bean>
 
 	<!-- <bean id="jdbcEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 

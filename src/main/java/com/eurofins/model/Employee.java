@@ -1,10 +1,10 @@
 package com.eurofins.model;
 
-public abstract class Employee {
+public  class Employee {
 
 	private long id;
 	private String name;
-	private Address address;
+	//private Address address;
 
 	
 	public Employee(long id, String name) {
@@ -29,19 +29,19 @@ public abstract class Employee {
 		this.name = name;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
+	//public Address getAddress() {
+	//	return address;
+	//}
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	//public void setAddress(Address address) {
+	//	this.address = address;
+	//}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		//result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -56,11 +56,11 @@ public abstract class Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
+		//if (address == null) {
+		//	if (other.address != null)
+		//		return false;
+		//} else if (!address.equals(other.address))
+		//	return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -73,7 +73,7 @@ public abstract class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", address=" + address + "]";
+		return "Employee [id=" + id + ", name=" + name + ", address="  + "]";
 	}
 
 }
