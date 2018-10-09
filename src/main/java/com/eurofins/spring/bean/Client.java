@@ -6,11 +6,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Client {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
-		Customer custA = (Customer) context.getBean("customer");
+		//Customer custA = (Customer) context.getBean("customer");
 				
-		System.out.println(custA.getCities());
+		//System.out.println(custA.getCities());
 	}
 
 }
