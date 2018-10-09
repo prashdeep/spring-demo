@@ -7,9 +7,14 @@
 	    http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:annotation-config />
-	<context:component-scan base-package="com.eurofins" />
+	<!--<context:annotation-config />
+	  <context:component-scan base-package="com.eurofins" />-->
 	
+	<bean id="jdbc" class="com.eurofins.util.JdbcUtil">
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		
+	</bean>
 	
 	<!-- <import resource="greeters.xml" /> <bean id="caller" class="com.eurofins.spring.Caller"> 
 		<constructor-arg name="greetingService" ref="awesomeGreet" /> </bean> -->
@@ -33,6 +38,14 @@
 		value="28"/> </bean> <bean id="contractEmployee" class="com.eurofins.model.ContractEmployee" 
 		parent="employee" /> -->
 		
-		<bean class="com.eurofins.postprocessors.SimpleBeanPostProcessor"/>
+		<!-- <bean class="com.eurofins.postprocessors.SimpleBeanPostProcessor"/>
+		 -->
+		 
+		 <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		 <property name="location" value="jdbc.properties">
+		 	
+		 </property>
+		 </bean>
+		
 
 </beans>
