@@ -2,11 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	    http://www.springframework.org/schema/beans/spring-beans.xsd
 	    http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 	    http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -20,7 +23,26 @@
 	<bean id="jdbc" class="com.eurofins.util.JdbcUtil">
 		<property name="username" value="${jdbc.username}"></property>
 		<property name="password" value="${jdbc.password}"></property>
+	</bean>
 
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dbcpDataSource" />
+	</bean>
+
+	<jdbc:embedded-database id="dataSource"
+		type="H2">
+		<jdbc:script location="classpath:db/sql/create-db.sql" />
+		<jdbc:script location="classpath:db/sql/insert-data.sql" />
+	</jdbc:embedded-database>
+
+	<bean id="dbcpDataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:mem:users" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
 	</bean>
 
 	<!-- <import resource="greeters.xml" /> <bean id="caller" class="com.eurofins.spring.Caller"> 
@@ -34,8 +56,12 @@
 			ref="inMemoryEmployeeDAO" />
 	</bean>
 
+	<!-- <bean id="inMemoryEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 
+		/> -->
+
 	<bean id="inMemoryEmployeeDAO"
-		class="com.eurofins.dao.InMemoryEmployeeDAOImpl" />
+		class="com.eurofins.dao.JdbcEmployeeDAOImpl">
+	</bean>
 
 	<!-- <bean id="jdbcEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 
 		/> -->
@@ -55,12 +81,9 @@
 		</property>
 	</bean>
 
-	<!-- Spring AOP XML Configuration 
-	<aop:config> 
-	   <aop:aspect ref="loggingAspect" id="loggingAspect" order="1"> 
-	     <aop:pointcut expression="execution(* com.eurofins.service.*.Employee*())" id="getNamePointcut" /> 
-	     <aop:around method="employeeAroundAdvice" pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint" />
-	   </aop:aspect> 
-	</aop:config> -->
+	<!-- Spring AOP XML Configuration <aop:config> <aop:aspect ref="loggingAspect" 
+		id="loggingAspect" order="1"> <aop:pointcut expression="execution(* com.eurofins.service.*.Employee*())" 
+		id="getNamePointcut" /> <aop:around method="employeeAroundAdvice" pointcut-ref="getNamePointcut" 
+		arg-names="proceedingJoinPoint" /> </aop:aspect> </aop:config> -->
 
 </beans>
