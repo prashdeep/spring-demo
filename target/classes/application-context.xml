@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	    http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
 	    http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!--<context:annotation-config />
-	  <context:component-scan base-package="com.eurofins" />-->
-	
+	<aop:aspectj-autoproxy />
+
+	<!--<context:annotation-config /> <context:component-scan base-package="com.eurofins" 
+		/> -->
+
+	<bean id="logAspect" class="com.eurofins.aspects.LoggingAspect" />
+
 	<bean id="jdbc" class="com.eurofins.util.JdbcUtil">
 		<property name="username" value="${jdbc.username}"></property>
 		<property name="password" value="${jdbc.password}"></property>
-		
+
 	</bean>
-	
+
 	<!-- <import resource="greeters.xml" /> <bean id="caller" class="com.eurofins.spring.Caller"> 
 		<constructor-arg name="greetingService" ref="awesomeGreet" /> </bean> -->
 	<!-- <bean id="customer" class="com.eurofins.spring.bean.Customer" lazy-init="true"> 
 		<property name="cities"> </property> </bean> -->
 
-	<!-- <bean id="employeeService"
+	<bean id="employeeService"
 		class="com.eurofins.service.EmployeeServiceImpl">
-		<constructor-arg name="employeeDAO" ref="inMemoryEmployeeDAO" />
-	</bean> -->
+		<constructor-arg name="employeeDAO"
+			ref="inMemoryEmployeeDAO" />
+	</bean>
 
-	<!-- <bean id="inMemoryEmployeeDAO" class="com.eurofins.dao.InMemoryEmployeeDAOImpl" /> -->
-	
-<!-- 	<bean id="jdbcEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" />
- -->	
+	<bean id="inMemoryEmployeeDAO"
+		class="com.eurofins.dao.InMemoryEmployeeDAOImpl" />
+
+	<!-- <bean id="jdbcEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 
+		/> -->
 
 	<!-- <bean id="employee" class="com.eurofins.model.Employee" abstract="true"> 
 		<constructor-arg name="id" value="23"/> <constructor-arg name="name" value="Ramesh"/> 
@@ -37,15 +46,18 @@
 		parent="employee" > <property name="salary" value="56000"/> <property name="vacationDays" 
 		value="28"/> </bean> <bean id="contractEmployee" class="com.eurofins.model.ContractEmployee" 
 		parent="employee" /> -->
-		
-		<!-- <bean class="com.eurofins.postprocessors.SimpleBeanPostProcessor"/>
-		 -->
-		 
-		 <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		 <property name="location" value="jdbc.properties">
-		 	
-		 </property>
-		 </bean>
-		
+
+	<!-- <bean class="com.eurofins.postprocessors.SimpleBeanPostProcessor"/> -->
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="jdbc.properties">
+		</property>
+	</bean>
+
+	<!-- Spring AOP XML Configuration <aop:config> <aop:aspect ref="loggingAspect" 
+		id="loggingAspect" order="1"> <aop:pointcut expression="execution(* com.eurofins.service.*.Employee*())" 
+		id="getNamePointcut" /> <aop:around method="employeeAroundAdvice" pointcut-ref="getNamePointcut" 
+		arg-names="proceedingJoinPoint" /> </aop:aspect> </aop:config> -->
 
 </beans>

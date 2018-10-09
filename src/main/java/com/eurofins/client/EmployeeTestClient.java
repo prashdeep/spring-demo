@@ -11,8 +11,8 @@ import com.eurofins.service.EmployeeService;
 public class EmployeeTestClient {
 
 	public static void main(String[] args) {
-		//ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-		//EmployeeService employeeService = context.getBean(EmployeeService.class, "employeeService");
+		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+		EmployeeService employeeService = context.getBean(EmployeeService.class, "employeeService");
 
 		/*
 		 * Employee ramesh = context.getBean(RegularEmployee.class, "regularEmployee");
@@ -23,7 +23,7 @@ public class EmployeeTestClient {
 
 		// inserting all the employees
 		// employeeService.insertEmployee(ramesh);
-		/*employeeService.insertEmployee(suresh);
+		employeeService.insertEmployee(suresh);
 		employeeService.insertEmployee(harish);
 		employeeService.insertEmployee(vinay);
 
