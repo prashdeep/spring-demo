@@ -55,9 +55,12 @@
 		</property>
 	</bean>
 
-	<!-- Spring AOP XML Configuration <aop:config> <aop:aspect ref="loggingAspect" 
-		id="loggingAspect" order="1"> <aop:pointcut expression="execution(* com.eurofins.service.*.Employee*())" 
-		id="getNamePointcut" /> <aop:around method="employeeAroundAdvice" pointcut-ref="getNamePointcut" 
-		arg-names="proceedingJoinPoint" /> </aop:aspect> </aop:config> -->
+	<!-- Spring AOP XML Configuration 
+	<aop:config> 
+	   <aop:aspect ref="loggingAspect" id="loggingAspect" order="1"> 
+	     <aop:pointcut expression="execution(* com.eurofins.service.*.Employee*())" id="getNamePointcut" /> 
+	     <aop:around method="employeeAroundAdvice" pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint" />
+	   </aop:aspect> 
+	</aop:config> -->
 
 </beans>
