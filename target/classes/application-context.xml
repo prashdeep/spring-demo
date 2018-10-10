@@ -17,8 +17,7 @@
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<aop:aspectj-autoproxy />
-	<tx:annotation-driven />
-
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!--<context:annotation-config /> <context:component-scan base-package="com.eurofins" 
 		/> -->
 
@@ -71,7 +70,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource">
-			<ref bean="dataSource" />
+			<ref bean="dbcpDataSource" />
 		</property>
 
 		<property name="packagesToScan" value="com.eurofins.model" />
@@ -90,6 +89,10 @@
 		<constructor-arg name="sessionFactory"
 			ref="sessionFactory" />
 	</bean>
+	<bean id="transactionManager"
+        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory" />
+</bean>
 
 	<!-- <import resource="greeters.xml" /> <bean id="caller" class="com.eurofins.spring.Caller"> 
 		<constructor-arg name="greetingService" ref="awesomeGreet" /> </bean> -->
@@ -101,10 +104,7 @@
 		<constructor-arg name="employeeDAO" ref="hibernateDAO" />
 	</bean>
 	
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+
 
 	<!-- <bean id="inMemoryEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 
 		/> -->
