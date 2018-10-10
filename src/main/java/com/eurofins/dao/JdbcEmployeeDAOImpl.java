@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eurofins.model.Employee;
 
@@ -30,6 +31,7 @@ public class JdbcEmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void save(Employee employee) {
 		
 		this.jdbcTemplate.execute("insert into employee (id, name) values ("+employee.getId()+" , '"+employee.getName()+"');");

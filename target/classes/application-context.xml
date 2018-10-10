@@ -3,6 +3,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	    http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -10,21 +11,22 @@
 		http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/jdbc 
 		http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
 	    http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<aop:aspectj-autoproxy />
+	<tx:annotation-driven />
 
 	<!--<context:annotation-config /> <context:component-scan base-package="com.eurofins" 
 		/> -->
 
 	<bean id="logAspect" class="com.eurofins.aspects.LoggingAspect" />
 
-	<!-- <bean id="jdbc" class="com.eurofins.util.JdbcUtil">
-		<property name="username" value="${jdbc.username}"></property>
-		<property name="password" value="${jdbc.password}"></property>
-	</bean>
- -->
+	<!-- <bean id="jdbc" class="com.eurofins.util.JdbcUtil"> <property name="username" 
+		value="${jdbc.username}"></property> <property name="password" value="${jdbc.password}"></property> 
+		</bean> -->
 	<bean id="jdbcTemplate"
 		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dbcpDataSource" />
@@ -41,12 +43,13 @@
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1" />
+		<property name="url"
+			value="jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1" />
 		<property name="username" value="sa" />
 		<property name="password" value="" />
 	</bean>
 
-	 <bean depends-on="dataSource"
+	<bean depends-on="dataSource"
 		class="org.springframework.beans.factory.config.MethodInvokingBean">
 		<property name="targetClass"
 			value="org.hsqldb.util.DatabaseManagerSwing" />
@@ -62,27 +65,30 @@
 			</list>
 		</property>
 	</bean>
-	
 
-	
-	<bean id="sessionFactory"	class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource"><ref bean="dataSource" /></property>
-		
-		<property name="packagesToScan"
-          value="com.eurofins.model"/>
-		
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+
+		<property name="packagesToScan" value="com.eurofins.model" />
+
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				
+
 			</props>
 		</property>
 	</bean>
-	
+
 	<bean id="hibernateDAO" class="com.eurofins.dao.HibernateDAOImpl">
-		<constructor-arg name="sessionFactory" ref="sessionFactory"/>
+		<constructor-arg name="sessionFactory"
+			ref="sessionFactory" />
 	</bean>
 
 	<!-- <import resource="greeters.xml" /> <bean id="caller" class="com.eurofins.spring.Caller"> 
@@ -92,20 +98,21 @@
 
 	<bean id="employeeService"
 		class="com.eurofins.service.EmployeeServiceImpl">
-		<constructor-arg name="employeeDAO"
-			ref="hibernateDAO" />
+		<constructor-arg name="employeeDAO" ref="hibernateDAO" />
 	</bean>
-	  <bean id="txManager"
-      class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- <bean id="inMemoryEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 
 		/> -->
 
 	<bean id="inMemoryEmployeeDAO"
 		class="com.eurofins.dao.JdbcEmployeeDAOImpl">
-		<constructor-arg name="dataSource" ref="dbcpDataSource"/>
+		<constructor-arg name="dataSource"
+			ref="dbcpDataSource" />
 	</bean>
 
 	<!-- <bean id="jdbcEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 

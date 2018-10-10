@@ -27,7 +27,7 @@ public class EmployeeTestClient {
 		  employeeService.insertEmployee(harish);
 		  employeeService.insertEmployee(vinay);
 
-		System.out.println(employeeService.findAllEmployees().size());
+		//System.out.println(employeeService.findAllEmployees().size());
 
 		/*
 		 * System.out.println("employee with Id: 23 ::"+employeeService.findEmployeeById
