@@ -9,7 +9,7 @@
 		<dbh2.version>1.4.197</dbh2.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<hibernate.version>4.3.6.Final</hibernate.version>
+		<hibernate.version>5.0.4.Final</hibernate.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -65,6 +65,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
 		</dependency>
 
 		<!-- Spring AOP + AspectJ -->
