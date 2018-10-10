@@ -13,64 +13,38 @@ import com.eurofins.model.Employee;
 public class JdbcEmployeeDAOImpl implements EmployeeDAO {
 
 
-	private DataSource dataSource;
+	
 	
 	private JdbcTemplate jdbcTemplate;
 
-	public JdbcEmployeeDAOImpl() {
-		
-		System.out.println("***********************************");
-		System.out.println("Came inside the constructor of the JDBC template ....");
-		System.out.println("***********************************");
+	public JdbcEmployeeDAOImpl(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
-	
-
-	public DataSource getDataSource() {
-		return dataSource;
-	}
-
-
-
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-
 
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 
-
-
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-
-
 	@Override
 	public void save(Employee employee) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		jdbcTemplate.execute("insert into employee (id, name) values ('23' , 'kiran');");
-		String sql = "SELECT * FROM employee";
-		 
-		List<Employee> empList = new ArrayList<Employee>();
 		
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-		for (Map row : rows) {
-			Employee emp = new Employee((int)row.get("id"), (String)row.get("name"));
-			empList.add(emp);
-		}
-		 System.out.println(empList);
-
-
+		this.jdbcTemplate.execute("insert into employee (id, name) values ("+employee.getId()+" , '"+employee.getName()+"');");
 	}
 
 	@Override
 	public List<Employee> listAll() {
-		return this.jdbcTemplate.queryForList("select * from employee;", Employee.class);
+		String sql = "SELECT * FROM employee";
+		List<Employee> empList = new ArrayList<Employee>();
+		List<Map<String, Object>> rows = this.jdbcTemplate.queryForList(sql);
+		for (Map<String, Object> row : rows) {
+			Employee emp = new Employee((int)row.get("id"), (String)row.get("name"));
+			empList.add(emp);
+		}
+		 return empList;
 	}
 
 	@Override

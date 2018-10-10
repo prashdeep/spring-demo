@@ -46,7 +46,7 @@
 		<property name="password" value="" />
 	</bean>
 
-	<bean depends-on="dataSource"
+	 <bean depends-on="dataSource"
 		class="org.springframework.beans.factory.config.MethodInvokingBean">
 		<property name="targetClass"
 			value="org.hsqldb.util.DatabaseManagerSwing" />
@@ -79,7 +79,7 @@
 
 	<bean id="inMemoryEmployeeDAO"
 		class="com.eurofins.dao.JdbcEmployeeDAOImpl">
-		<property name="dataSource" ref="dbcpDataSource"></property>
+		<constructor-arg name="dataSource" ref="dbcpDataSource"/>
 	</bean>
 
 	<!-- <bean id="jdbcEmployeeDAO" class="com.eurofins.dao.JdbcEmployeeDAOImpl" 
