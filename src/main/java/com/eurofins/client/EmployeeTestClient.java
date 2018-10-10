@@ -3,9 +3,7 @@ package com.eurofins.client;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.eurofins.model.ContractEmployee;
 import com.eurofins.model.Employee;
-import com.eurofins.model.RegularEmployee;
 import com.eurofins.service.EmployeeService;
 
 public class EmployeeTestClient {
@@ -17,9 +15,9 @@ public class EmployeeTestClient {
 		/*
 		 * Employee ramesh = context.getBean(RegularEmployee.class, "regularEmployee");
 		 */
-		Employee suresh = new ContractEmployee(24, "Suresh");
-		Employee harish = new RegularEmployee(25, "Harish");
-		Employee vinay = new ContractEmployee(26, "Vinay");
+		Employee suresh = new Employee(24, "Suresh");
+		Employee harish = new Employee(25, "Harish");
+		Employee vinay = new Employee(26, "Vinay");
 
 		// inserting all the employees
 		  employeeService.insertEmployee(suresh);

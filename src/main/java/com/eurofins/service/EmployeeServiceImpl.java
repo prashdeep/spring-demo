@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eurofins.dao.EmployeeDAO;
 import com.eurofins.model.Employee;
@@ -22,6 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	
 	@Override
+	@Transactional(readOnly = false)
 	public void insertEmployee(Employee employee) {
 		//validations 
 		employeeDAO.save(employee);

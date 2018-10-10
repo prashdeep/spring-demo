@@ -9,7 +9,7 @@
 		<dbh2.version>1.4.197</dbh2.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<hibernate.version>5.0.4.Final</hibernate.version>
+		<hibernate.version>4.3.9.Final</hibernate.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -40,6 +40,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
+			<version>4.3.9.RELEASE</version>
 		</dependency>
 
 		<!-- Hibernate -->

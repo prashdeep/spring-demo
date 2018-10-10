@@ -68,7 +68,7 @@
 
 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource">
 			<ref bean="dbcpDataSource" />
 		</property>
@@ -90,7 +90,7 @@
 			ref="sessionFactory" />
 	</bean>
 	<bean id="transactionManager"
-        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
     <property name="sessionFactory" ref="sessionFactory" />
 </bean>
 
